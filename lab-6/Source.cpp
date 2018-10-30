@@ -233,7 +233,7 @@ bool getNumber() {
 		printf("Your number:\n");
 		printf("\tIn decimal: %ld\n", number);
 		printf("\tIn octal: %o\n", number);
-		printf("\tIn hexadecimal: 0x%xu\n", number);
+		printf("\tIn hexadecimal: 0x%x\n", number);
 		return true;
 	}
 	else return false;
@@ -241,7 +241,7 @@ bool getNumber() {
 
 bool getReciprocal() {
 	if (checkNumber()) {
-		printf("Reciprocal number of %ld is 1/%ld. It approximately eqials %.5lf\n", number, number, 1 / number);
+		printf("Reciprocal number of %ld is 1/%ld. It approximately eqials %lf\n", number, number, (double) 1 / number);
 	}
 	else return false;
 }
