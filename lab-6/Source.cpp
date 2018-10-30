@@ -9,8 +9,72 @@
 
 #define scanf scanf_s
 
+int getMenuItemsCount(void);
+const char * getOptionTitle(int);
+void updateScreen(int);
+void moveUp(int*);
+void moveDown(int*);
+void prepareScreen(int);
+long convert(int, int);
+bool inputNumber(void);
+bool checkNumber(void);
+bool getNumber(void);
+bool getReciprocal(void);
+bool getNumberInNS(void);
+void about(void);
+void exitProgram(void);
+void awaitToGetBack(void);
+void handleEnter(int);
+
 long number = 0;
 bool isNumberSpecified = false;
+
+int main() {
+	char key;
+	bool keyTrigger = false;
+	bool enterTrigger = false;
+
+	int pos = 0;
+	updateScreen(pos);
+	while ((key = _getch()) != '#') {
+		switch (key) {
+			case -32: {
+				keyTrigger = true;
+				break;
+			}
+			case 13: {
+				enterTrigger = true;
+				break;
+			}
+			default: {
+				if (keyTrigger) {
+					switch (key) {
+						case KEY_UP: {
+							moveUp(&pos);
+							updateScreen(pos);
+							break;
+						}
+						case KEY_DOWN: {
+							moveDown(&pos);
+							updateScreen(pos);
+							break;
+						}
+					}
+					keyTrigger = false;
+				}
+				else if (enterTrigger) {
+					if (key == 0) {
+						handleEnter(pos);
+						updateScreen(pos);
+					}
+					enterTrigger = false;
+				}
+				break;
+			}
+		}
+	}
+	return 0;
+}
 
 int getMenuItemsCount() {
 	return 6;
@@ -18,27 +82,27 @@ int getMenuItemsCount() {
 
 const char * getOptionTitle(int pos) {
 	switch (pos) {
-		case 0: {
-			return "Input number";
-		}
-		case 1: {
-			return "Get number";
-		}
-		case 2: {
-			return "Get reciprocal number";
-		}
-		case 3: {
-			return "Convert to k-based NS";
-		}
-		case 4: {
-			return "About this shit";
-		}
-		case 5: {
-			return "Exit";
-		}
-		default: {
-			return "[INVALID]";
-		}
+	case 0: {
+		return "Input number";
+	}
+	case 1: {
+		return "Get number";
+	}
+	case 2: {
+		return "Get reciprocal number";
+	}
+	case 3: {
+		return "Convert to k-based NS";
+	}
+	case 4: {
+		return "About this shit";
+	}
+	case 5: {
+		return "Exit";
+	}
+	default: {
+		return "[INVALID]";
+	}
 	}
 }
 
@@ -54,7 +118,8 @@ void updateScreen(int pos) {
 void moveUp(int *posPtr) {
 	if (*posPtr <= 0) {
 		*posPtr = getMenuItemsCount() - 1;
-	} else {
+	}
+	else {
 		*posPtr -= 1;
 	}
 }
@@ -62,7 +127,8 @@ void moveUp(int *posPtr) {
 void moveDown(int *posPtr) {
 	if (*posPtr >= getMenuItemsCount() - 1) {
 		*posPtr = 0;
-	} else {
+	}
+	else {
 		*posPtr += 1;
 	}
 }
@@ -99,7 +165,8 @@ bool checkNumber() {
 			fflush(stdin);
 			fseek(stdin, 0, SEEK_END);
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
@@ -168,89 +235,43 @@ void awaitToGetBack() {
 void handleEnter(int pos) {
 	prepareScreen(pos);
 	switch (pos) {
-		case 0: {
-			if (inputNumber()) {
-				awaitToGetBack();
-			}
-			break;
-		}
-		case 1: {
-			if (getNumber()) {
-				awaitToGetBack();
-			}
-			break;
-		}
-		case 2: {
-			if (getReciprocal()) {
-				awaitToGetBack();
-			}
-			break;
-		}
-		case 3: {
-			if (getNumberInNS()) {
-				awaitToGetBack();
-			}
-			break;
-		}
-		case 4: {
-			about();
+	case 0: {
+		if (inputNumber()) {
 			awaitToGetBack();
-			break;
 		}
-		case 5: {
-			exitProgram();
-			printf("\nEnter any key exit...");
-			getchar();
-			exit(0);
-			break;
+		break;
+	}
+	case 1: {
+		if (getNumber()) {
+			awaitToGetBack();
 		}
+		break;
+	}
+	case 2: {
+		if (getReciprocal()) {
+			awaitToGetBack();
+		}
+		break;
+	}
+	case 3: {
+		if (getNumberInNS()) {
+			awaitToGetBack();
+		}
+		break;
+	}
+	case 4: {
+		about();
+		awaitToGetBack();
+		break;
+	}
+	case 5: {
+		exitProgram();
+		printf("\nEnter any key exit...");
+		getchar();
+		exit(0);
+		break;
+	}
 	}
 	fflush(stdin);
 	fseek(stdin, 0, SEEK_END);
-}
-
-int main() {
-	char key;
-	bool keyTrigger = false;
-	bool enterTrigger = false;
-	int pos = 0;
-	updateScreen(pos);
-	while ((key = _getch()) != '#') {
-		switch (key) {
-			case -32: {
-				keyTrigger = true;
-				break;
-			}
-			case 13: {
-				enterTrigger = true;
-				break;
-			}
-			default: {
-				if (keyTrigger) {
-					switch (key) {
-						case KEY_UP: {
-							moveUp(&pos);
-							updateScreen(pos);
-							break;
-						}
-						case KEY_DOWN: {
-							moveDown(&pos);
-							updateScreen(pos);
-							break;
-						}
-					}
-					keyTrigger = false;
-				}
-				else if (enterTrigger) {
-					if (key == 0) {
-						handleEnter(pos);
-						updateScreen(pos);
-					}
-					enterTrigger = false;
-				}
-				break;
-			}
-		}
-	}
-	return 0;
 }
