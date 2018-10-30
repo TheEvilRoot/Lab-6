@@ -55,9 +55,6 @@ bool getNumberInNS(void);
 // Get some info (useless) about this program.
 void about(void);
 
-// Show goodby and exit ;)
-void exitProgram(void);
-
 // Await for user action to show menu back
 void awaitToGetBack(void);
 
@@ -286,10 +283,6 @@ void about() {
 	printf("URL: https://github.com/TheEvilRoot/Lab-6 (Private)\n");
 }
 
-void exitProgram() {
-	printf("Goodby!\n");
-}
-
 void awaitToGetBack() {
 	printf("\nEnter any key to get back to menu...");
 	getchar();
@@ -328,7 +321,7 @@ void handleEnter(int pos) {
 			break;
 		}
 		case 5: {
-			exitProgram();
+			printf("Goodby!\n");
 			printf("\nEnter any key exit...");
 			getchar();
 			exit(0);
