@@ -11,6 +11,10 @@
 // Visual Studio is sucks
 #define scanf scanf_s
 
+#define R_VERSION 1
+#define M_VERSION 2
+#define BUILD_DATE 30102018
+#define BUILD_N 3
 
 // Get constant number of menu items
 int getMenuItemsCount(void);
@@ -275,7 +279,11 @@ bool getNumberInNS() {
 }
 
 void about() {
-	printf("IDontKnowHowIShouldCallThisProgram\nVersion: 1.2\nBuild: 30102018-3\nAuthor: TheEvilRoot\nURL: https://github.com/TheEvilRoot/Lab-6 (Private)\n");
+	printf("IDontKnowHowIShouldCallThisProgram\n");
+	printf("Version: %d.%d\n", R_VERSION, M_VERSION);
+	printf("Build: %ld-%d\n", BUILD_DATE, BUILD_N);
+	printf("Author: TheEvilRoot\n");
+	printf("URL: https://github.com/TheEvilRoot/Lab-6 (Private)\n");
 }
 
 void exitProgram() {
