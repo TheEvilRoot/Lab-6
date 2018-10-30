@@ -1,4 +1,4 @@
 ﻿  Source.cpp
-c:\users\robot\documents\visual studio 2017\projects\lab-6\lab-6\source.cpp(122): warning C4477: 'printf' : format string '%.5lf' requires an argument of type 'double', but variadic argument 3 has type 'long'
-c:\users\robot\documents\visual studio 2017\projects\lab-6\lab-6\source.cpp(125): warning C4715: 'getReciprocal': not all control paths return a value
+c:\users\robot\documents\visual studio 2017\projects\lab-6\lab-6\source.cpp(189): warning C4477: 'printf' : format string '%.5lf' requires an argument of type 'double', but variadic argument 3 has type 'long'
+c:\users\robot\documents\visual studio 2017\projects\lab-6\lab-6\source.cpp(192): warning C4715: 'getReciprocal': not all control paths return a value
   lab-6.vcxproj -> C:\Users\robot\Documents\Visual Studio 2017\Projects\lab-6\Debug\lab-6.exe
